@@ -1,59 +1,19 @@
-function register() {
-    // Validate form fields
-    var formData = {
-        firstName: document.getElementById('firstName').value,
-        lastName: document.getElementById('lastName').value,
-        address: document.getElementById('address').value,
-        postCode: document.getElementById('postCode').value,
-        country: document.getElementById('country').value,
-        email: document.getElementById('email').value,
-        phoneNumber: document.getElementById('phoneNumber').value,
-        password: document.getElementById('password').value,
-        confirmPassword: document.getElementById('confirmPassword').value
-    };
+$(document).ready(function () {
+    $("#registerButton").on("click", function () {
+        register();
+    });
 
-    // Perform client-side validation
-    if (!validateForm(formData)) {
-        return;
-    }
-
-    // Send data to the server using AJAX
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/Shashank-s_Guvi_Assignment/php/register.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                // Display the result on the page
-                document.getElementById('registrationResult').textContent = xhr.responseText;
-            } else {
-                console.error('AJAX Error:', xhr.status, '-', xhr.statusText);
+    function register() {
+        $.ajax({
+            type: "POST",
+            url: "../php/register.php",
+            data: $("#registerForm").serialize(),
+            success: function (response) {
+                $("#registrationResult").html(response);
+            },
+            error: function (error) {
+                console.log(error);
             }
-        }
-    };
-
-    // Convert form data to URL-encoded format
-    var urlEncodedData = Object.keys(formData)
-        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]))
-        .join('&');
-
-    xhr.send(urlEncodedData);
-}
-
-// Function to perform client-side validation
-function validateForm(formData) {
-    for (var key in formData) {
-        if (!formData[key]) {
-            alert('All fields are required.');
-            return false;
-        }
+        });
     }
-
-    if (formData.password !== formData.confirmPassword) {
-        alert('Password and Confirm Password must match.');
-        return false;
-    }
-
-    return true;
-}
+});
