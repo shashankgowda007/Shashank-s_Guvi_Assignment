@@ -1,9 +1,19 @@
 <?php
-$conn = new mysqli('localhost', 'root', '', 'guvi_assignment_shashank');
+$host = "sql12.freesqldatabase.com";
+$database = "sql12666680";
+$username = "sql12666680";
+$password = "HQgTRrvBfs";
+$port = 3306;
+
+$conn = new mysqli($host, $username, $password, $database, $port);
+
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
+$response = array(); // Initialize response array
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $email = $_GET["email"];
     $sql = "SELECT * FROM user WHERE email = ?";
@@ -14,12 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        echo json_encode($user);
+        $response['status'] = 'success';
+        $response['user'] = $user;
     } else {
-        echo "User not found!";
+        $response['status'] = 'error';
+        $response['message'] = 'User not found!';
     }
 
     $stmt->close();
 }
 
 $conn->close();
+
+header('Content-Type: application/json');
+echo json_encode($response);

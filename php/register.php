@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirmPassword = mysqli_real_escape_string($conn, $_POST["confirmPassword"]);
 
     // Check if email already exists
-    $checkQuery = "SELECT * FROM users WHERE email = ?";
+    $checkQuery = "SELECT * FROM user WHERE email = ?";
     $checkStmt = $conn->prepare($checkQuery);
     $checkStmt->bind_param("s", $email);
     $checkStmt->execute();
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "User with the same email already exists!";
     } else {
         // Insert new user data
-        $insertQuery = "INSERT INTO users (firstName, lastName, gender, DOB, address, postCode, country, email, phoneNumber, password, confirmPassword) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO user (firstName, lastName, gender, DOB, address, postCode, country, email, phoneNumber, password, confirmPassword) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $insertStmt = $conn->prepare($insertQuery);
         $insertStmt->bind_param("sssssssssss", $firstName, $lastName, $gender, $DOB, $address, $postCode, $country, $email, $phoneNumber, $password, $confirmPassword);
 

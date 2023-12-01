@@ -1,6 +1,12 @@
 <?php
 
-$conn = new mysqli('localhost', 'root', '', 'guvi_assignment_shashank');
+$host = "sql12.freesqldatabase.com";
+$database = "sql12666680";
+$username = "sql12666680";
+$password = "HQgTRrvBfs";
+$port = 3306;
+
+$conn = new mysqli($host, $username, $password, $database, $port);
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -13,20 +19,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST["password"];
 
     // Use prepared statement to prevent SQL injection
-    $stmt = $conn->prepare("SELECT * FROM user WHERE email = ? AND password = ?");
-    $stmt->bind_param("ss", $email, $password);
+    $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?");
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
 
     if ($result->num_rows == 1) {
-        // Login successful
-        $response['status'] = 'success';
-        $response['message'] = 'Login successful!';
+        $user = $result->fetch_assoc();
+
+        // Verify the password
+        if (password_verify($password, $user['password'])) {
+            // Login successful
+            $response['status'] = 'success';
+            $response['message'] = 'Login successful!';
+        } else {
+            // Login failed - Incorrect password
+            $response['status'] = 'error';
+            $response['message'] = 'Incorrect email or password.';
+        }
     } else {
-        // Login failed
+        // Login failed - User not found
         $response['status'] = 'error';
-        $response['message'] = 'Invalid email or password.';
+        $response['message'] = 'Incorrect email or password.';
     }
 }
 
