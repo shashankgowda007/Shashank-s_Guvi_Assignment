@@ -24,16 +24,30 @@ body {
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height:100px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
+.video{
+    text-align: center;
+    
+    
+}
+video{
+   /* text-align: center; */
+   border: 2px solid black;
+   /* width: 500px; */
+   
+}
 /* Style the image */
 img {
     max-width: 100%;
-    height: auto;
-    margin-top: 20px;
+    height: 100px;
+    /* margin-top: 20px; */
 }
-
+.body{
+    background-image:url('../assets/background.jpg');
+    background-size: cover;
+}
 /* Additional styles for the header */
 header {
     background-color: rgb(241, 186, 66);
@@ -43,6 +57,11 @@ header {
     justify-content: space-between;
     align-items: center;
     border-radius: 5px 5px 0 0;
+}
+
+.footer{
+    justify-content: center;
+    align-items: center;
 }
 
 

@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
-<body>
+<body class="body">
     <header>
         <h2>Welcome to the Home Page</h2>
         <div>
@@ -19,15 +19,26 @@
         </div>
         
     </header>
-
+  <div class="hero">
     <div class="container">
-<img src="./assets/guvi.png" alt="no img">
+<img src="./assets/guvi.png" alt="no">
     </div>
-
+ <div class="video">
+    <video src="./assets/working.mp4"  id="myVideo" height="400px" width="850px" autoplay controls loop muted playsinline></video>
+ </div> </div>
+   <header class="footer">
+    <h2  style="color: white;">&copy Developed by Shashank Gowda</h2>
+</header>
     <script src="js/jquery.min.js"></script>
     <script src="js/login.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/register.js"></script>
+    <script>
+    
+        var video = document.getElementById("myVideo");
+
+        video.playbackRate = 5;
+    </script>
 </body>
 
 </html>

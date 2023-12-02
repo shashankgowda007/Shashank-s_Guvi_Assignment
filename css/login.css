@@ -77,3 +77,20 @@ button:hover {
         padding: 15px;
     }
 }
+.body {
+    background-image: url('../assets/background.jpg');
+    background-size: cover;
+}
+.footer {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(241, 186, 66);
+    color: #fff;
+    padding: 50px;
+    
+
+
+    border-radius: 5px 5px 0 0;
+    /* position: fixed; */
+}

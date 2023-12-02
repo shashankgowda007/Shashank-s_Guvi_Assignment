@@ -10,9 +10,15 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
-<body>
+<body class="body">
     <div class="container">
-        <h2>User Profile</h2>
+        <header>
+            <h2>User Profile</h2>
+            <div>
+                <button onclick="window.location.href='index.html'">Logout</button>
+            </div>
+        </header>
+        <!-- <h2>User Profile</h2> -->
         <div>
             <label for="id">ID:</label>
             <span id="id"></span>
@@ -62,6 +68,9 @@
             <span id="confirmPassword"></span>
         </div>
     </div>
+    <header class="footer">
+        <h2 style="color: white;">&copy Developed by Shashank Gowda</h2>
+    </header>
     <script src="js/profile.js"></script>
 </body>
 
